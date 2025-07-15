@@ -13,7 +13,10 @@ AR = ar rc
 RANLIB = ranlib
 RM = rm -f
 
-.PHONY: all clean fclean re bonus
+C_TEST = tests.c
+TEST_BIN = test
+
+.PHONY: all clean fclean re bonus test
 
 all: $(NAME)
 
@@ -29,10 +32,13 @@ bonus: $(OBJ_FILES) $(BONUS_OBJ)
 	$(NASM) $(NASMFLAGS) -o $@ $<
 
 clean:
-	$(RM) $(OBJ_FILES) $(BONUS_OBJ)
+	$(RM) $(OBJ_FILES) $(BONUS_OBJ) $(TEST_BIN)
 
 fclean: clean
 	$(RM) $(NAME)
+
+test: libasm.a tests.c
+	gcc -Wall -Wextra -Werror tests.c -L. -lasm -o test
 
 re: fclean all
 
