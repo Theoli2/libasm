@@ -16,7 +16,7 @@ RM = rm -f
 C_TEST = tests.c
 TEST_BIN = test
 
-.PHONY: all clean fclean re bonus test
+.PHONY: all clean fclean re bonus test run
 
 all: $(NAME)
 
@@ -39,6 +39,9 @@ fclean: clean
 
 test: libasm.a tests.c
 	gcc -Wall -Wextra -Werror tests.c -L. -lasm -o test
+
+run: test
+	./$(TEST_BIN)
 
 re: fclean all
 
