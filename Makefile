@@ -38,7 +38,7 @@ fclean: clean
 	$(RM) $(NAME)
 
 test: libasm.a tests.c
-	gcc -Wall -Wextra -Werror tests.c -L. -lasm -o test
+	gcc -no-pie -Wall -Wextra -Werror tests.c -L. -lasm -o test
 
 run: test
 	./$(TEST_BIN)
