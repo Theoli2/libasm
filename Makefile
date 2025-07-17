@@ -14,11 +14,11 @@ RANLIB = ranlib
 RM = rm -f
 
 C_TEST = tests.c
-TEST_BIN = test
+TEST_BIN = test.out
 
 .PHONY: all clean fclean re bonus test run
 
-all: $(NAME)
+all: run
 
 $(NAME): $(OBJ_FILES)
 	$(AR) $(NAME) $(OBJ_FILES)
@@ -37,10 +37,13 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-test: libasm.a tests.c
-	gcc -Wall -Wextra -Werror tests.c -L. -lasm -o test
+test: $(NAME) $(OBJ_TESTS)
+	gcc -Wall -Wextra -Werror tests.c -L. -lasm -o test.out
 
-run: test
+run:
+	@if [ ! -f $(TEST_BIN) ]; then \
+		$(MAKE) test; \
+	fi; \
 	./$(TEST_BIN)
 
 re: fclean all
