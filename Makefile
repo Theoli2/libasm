@@ -32,13 +32,13 @@ bonus: $(OBJ_FILES) $(BONUS_OBJ)
 	$(NASM) $(NASMFLAGS) -o $@ $<
 
 clean:
-	$(RM) $(OBJ_FILES) $(BONUS_OBJ) $(TEST_BIN)
+	$(RM) $(OBJ_FILES) $(BONUS_OBJ) $(TEST_BIN) *.txt
 
 fclean: clean
 	$(RM) $(NAME)
 
 test: libasm.a tests.c
-	gcc -no-pie -Wall -Wextra -Werror tests.c -L. -lasm -o test
+	gcc -Wall -Wextra -Werror tests.c -L. -lasm -o test
 
 run: test
 	./$(TEST_BIN)
