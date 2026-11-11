@@ -1,0 +1,11 @@
+# Build output
+*.o
+libasm.a
+test.out
+
+# Files created by the tests
+test_input.txt
+test_output.txt
+
+# Editor
+.vscode/
