@@ -8,8 +8,8 @@ ft_strcmp:
 
 .loop:
     mov al, [rdi + rcx]
-    mov bl, [rsi + rcx]
-    cmp al, bl
+    mov dl, [rsi + rcx]         ; rdx is caller-saved, unlike rbx
+    cmp al, dl
     jne .diff
     test al, al
     je .equal
@@ -18,8 +18,8 @@ ft_strcmp:
 
 .diff:
     movzx eax, al
-    movzx ebx, bl
-    sub eax, ebx
+    movzx edx, dl
+    sub eax, edx
     ret
 
 .equal:
